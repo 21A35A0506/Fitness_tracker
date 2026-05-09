@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Praveen Fitness Coaching</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+    body{background:#0f172a;color:#fff;scroll-behavior:smooth}
+    header{position:fixed;width:100%;top:0;background:#020617cc;padding:15px 40px;display:flex;justify-content:space-between;z-index:999}
+    header a{color:#fff;text-decoration:none;margin:0 15px;transition:.3s}
+    header a:hover{color:#22c55e}
+    section{padding:100px 40px}
+   .hero{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;background:linear-gradient(rgba(2,6,23,.75),rgba(2,6,23,.9)),url("Home_page.jpg") center/cover no-repeat fixed}
+    .hero h1{font-size:48px}
+    .btn{margin-top:20px;padding:12px 25px;background:#22c55e;border:none;color:#fff;cursor:pointer;border-radius:6px;transition:.3s}
+    .btn:hover{transform:scale(1.08) translateY(-2px);background:#16a34a;box-shadow:0 10px 25px rgba(34,197,94,.5)}
+
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:30px;margin-top:30px}
+
+    .card{
+      position:relative;
+      border-radius:16px;
+      overflow:hidden;
+      cursor:pointer;
+      transform-style:preserve-3d;
+      perspective:1000px;
+      --rx:0deg;
+      --ry:0deg;
+      --mx:50%;
+      --my:50%;
+      transition:transform .15s ease-out;
+    }
+
+    .card img{
+      width:100%;
+      height:260px;
+      object-fit:cover;
+      transition:transform .6s;
+    }
+
+    .card::before{
+      content:'';
+      position:absolute;
+      inset:0;
+      background:radial-gradient(circle at var(--mx) var(--my),rgba(255,255,255,.25),transparent 40%);
+      opacity:0;
+      transition:.3s;
+      pointer-events:none;
+    }
+
+    .card::after{
+      content:'';
+      position:absolute;
+      inset:0;
+      background:linear-gradient(to top,rgba(2,6,23,.75),transparent 65%);
+      transition:.4s;
+    }
+
+    .overlay{
+      position:absolute;
+      bottom:0;
+      padding:22px;
+      width:100%;
+      transform:translateY(65%);
+      transition:.5s;
+      color:#ffffff;
+      background:transparent;
+    }
+
+    .overlay h3{margin-bottom:8px}
+    .overlay p{font-size:14px;opacity:.9}
+
+    .card:hover{
+      transform:rotateX(var(--rx)) rotateY(var(--ry)) translateY(-12px) scale(1.04);
+      box-shadow:0 25px 50px rgba(0,0,0,.6);
+    }
+
+    .card:hover img{transform:scale(1.2)}
+    .card:hover .overlay{
+      transform:translateY(0);
+      background:rgba(2,6,23,.55);
+    }
+    .card:hover::before{opacity:1}
+
+    h2{text-align:center}
+
+    form{max-width:600px;margin:30px auto;display:flex;flex-direction:column}
+    input,textarea{margin:10px 0;padding:12px;border-radius:6px;border:none}
+
+    footer{text-align:center;padding:20px;background:#020617}
+      .coach{display:flex;justify-content:center;margin-top:30px}
+      
+.coach-card{
+  display:grid;
+  grid-template-columns:300px 1fr;
+  gap:30px;
+  align-items:center;
+
+  background: rgba(2,6,23,0.08);   /* very transparent */
+  backdrop-filter: blur(4px);       /* less blur so bg shows */
+
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:16px;
+  padding:25px;
+  max-width:900px;
+  box-shadow:0 20px 40px rgba(0,0,0,.35);
+  transition:.4s;
+}
+  
+    .coach-card:hover{transform:translateY(-8px) scale(1.02)}
+    .coach-card img{width:100%;border-radius:14px;object-fit:cover}
+    .coach-info h3{margin-bottom:10px}
+    .coach-info p{opacity:.9;margin-bottom:8px}
+
+      /* .coach-card{display:grid;grid-template-columns:300px 1fr;gap:30px;align-items:center;background:#020617;border-radius:16px;padding:25px;max-width:900px;box-shadow:0 20px 40px rgba(0,0,0,.5);transition:.4s} */
+      
+    .coach-bg{
+      background:linear-gradient(rgba(2,6,23,.85),rgba(2,6,23,.95)),url("coachbg.jpg") center/cover fixed;
+      border-radius:20px;
+      margin:40px 20px;
+      padding:120px 40px;
+    }
+
+
+
+@media screen and (max-width:768px){
+
+/* Fix background behaviour */
+.coach-bg{
+background-attachment:scroll;
+background-position:center;
+background-size:cover;
+
+padding:70px 20px;
+margin:20px 10px;
+border-radius:15px;
+}
+
+/* Stack layout vertically */
+.coach-card{
+display:flex;
+flex-direction:column;
+align-items:center;
+text-align:center;
+
+gap:20px;
+padding:20px;
+}
+
+/* Coach image mobile size */
+.coach-card img{
+width:100%;
+max-width:280px;
+height:auto;
+margin:auto;
+border-radius:14px;
+}
+
+/* Text spacing */
+.coach-info{
+padding:5px 10px;
+}
+
+.coach-info h3{
+font-size:22px;
+margin-bottom:10px;
+}
+
+.coach-info p{
+font-size:14px;
+line-height:1.6;
+}
+
+}
+
+
+/* ===============================
+   NAVIGATION BAR FIX
+================================*/
+
+header{
+position:fixed;
+top:0;
+width:100%;
+background:#020617cc;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 25px;
+z-index:999;
+}
+
+.logo{
+font-weight:600;
+}
+
+/* ===== NAVBAR ===== */
+
+header{
+position:fixed;
+top:0;
+width:100%;
+background:#020617cc;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 25px;
+z-index:1000;
+}
+
+nav{
+display:flex;
+gap:25px;
+align-items:center;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+}
+
+/* hidden desktop */
+.menu-toggle{
+display:none;
+font-size:28px;
+cursor:pointer;
+color:white;
+}
+
+/* ===== MOBILE ===== */
+
+@media(max-width:768px){
+
+.menu-toggle{
+display:block;
+}
+
+/* mobile menu */
+nav{
+position:absolute;
+top:65px;
+left:0;
+width:100%;
+background:#020617;
+
+flex-direction:column;
+align-items:center;
+gap:20px;
+
+padding:25px 0;
+
+display:none;
+}
+
+/* when active */
+nav.show{
+display:flex;
+}
+
+}
+  </style>
+</head>
+<body>
+ <header>
+
+<h3 class="logo">Praveen Fitness Coaching</h3>
+
+<div class="menu-toggle" id="menuToggle">
+☰
+</div>
+
+<nav id="navMenu">
+<a href="#home">Home</a>
+<a href="#services">Services</a>
+<a href="#process">Process</a>
+<a href="#coach">Coach</a>
+<a href="#contact">Contact</a>
+
+<a href="https://www.instagram.com/trainwith_praveen/" target="_blank">
+<img src="instagram.png" width="22">
+</a>
+</nav>
+
+</header>
+
+  <section id="home" class="hero reveal">
+    <h1>Online Fitness Coaching</h1>
+    <p>Personalized Training • Diet Plans • Real Transformations</p>
+    <a href="#contact"><button class="btn">Rise and Rebuild</button></a>
+  </section>
+
+  <!-- <section id="transform" class="reveal">
+    <h2>Client Transformations</h2>
+    <div class="grid">
+      <div class="card"><img src="https://images.unsplash.com/photo-1579758629938-03607ccdbaba?auto=format&fit=crop&w=800&q=80"><div class="overlay"><h3>12 Week Transformation</h3><p>Muscle Gain Program</p></div></div>
+      <div class="card"><img src="https://images.unsplash.com/photo-1594737625785-a6cbdabd333c?auto=format&fit=crop&w=800&q=80"><div class="overlay"><h3>Fat Loss</h3><p>Online Coaching</p></div></div>
+      <div class="card"><img src="https://images.unsplash.com/photo-1605296867424-35fc25c9212a?auto=format&fit=crop&w=800&q=80"><div class="overlay"><h3>Strength Build</h3><p>Beginner Program</p></div></div>
+    </div>
+  </section> -->
+
+  <section id="services" class="reveal">
+    <h2>Services</h2>
+    <div class="grid">
+      <div class="card"><img src="services1.jpg"><div class="overlay"><h3>Personal Training</h3><p>Custom workouts & tracking</p></div></div>
+      <div class="card"><img src="services2.jpg"><div class="overlay"><h3>Diet Planning</h3><p>Science-based nutrition</p></div></div>
+      <div class="card"><img src="services3.jpg"><div class="overlay"><h3>Online Coaching</h3><p>Weekly progress monitoring</p></div></div>
+    </div>
+  </section>
+
+  <section id="process" class="reveal">
+    <h2>How Coaching Works</h2>
+    <div class="grid">
+      <div class="card"><img src="coaching1.jpg"><div class="overlay"><h3>Step 1</h3><p>Consultation & Goal Analysis</p></div></div>
+      <div class="card"><img src="coaching2.jpg"><div class="overlay"><h3>Step 2</h3><p>Personalized Plan</p></div></div>
+      <div class="card"><img src="coaching3.jpg"><div class="overlay"><h3>Step 3</h3><p>Tracking & Transformation</p></div></div>
+    </div>
+  </section>
+
+  <section id="coach" class="reveal coach-bg">
+    <h2 style="text-align:center">Meet Your Coach</h2>
+    <div class="coach">
+      <div class="coach-card">
+        <img src="coachbgprofile.jpg" alt="Coach Face">
+        <div class="coach-info">
+          <h3>Praveen Nandan</h3>
+            <p> ● Fitness Coach - 5 years of experience in coaching </p>
+            <p> ● K11 Certified Fitness & Nutrition Professional</p>
+           <p> ● Mobility - Flexibility - Prehab & rehab </p>
+          <p>● Helping clients to build sustainable physique through structured training, progressive overload and personalized nutrition.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="reveal">
+    <h2>Apply for Coaching</h2>
+<p id="success-message" style="display:none;color:green;text-align:center;margin-bottom:15px;">
+Thanks for reaching out.I will contact you soon..
+</p>
+    <form id="contact-form" action="https://formsubmit.co/praveenthejackedmff@gmail.com" method="POST">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_subject" value="New Fitness Client Enquiry">
+      <input type="hidden" name="_template" value="table">
+<input type="hidden" name="_next" value="">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <textarea name="message" rows="5" placeholder="Your Goal / Requirement" required></textarea>
+      <button class="btn" type="submit">Submit</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>©2026 Praveen Nandan Fitness™</p>
+  </footer>
+<!--
+  <a href="https://wa.me/919999999999" style="position:fixed;bottom:20px;right:20px;background:#22c55e;padding:15px;border-radius:50%;text-decoration:none;color:#fff;font-weight:bold">WA</a>
+
+-->
+
+     <script>
+    const reveals=document.querySelectorAll('.reveal');
+    const observer=new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){entry.target.style.opacity=1;entry.target.style.transform='translateY(0)'}
+      })
+    },{threshold:.2});
+    reveals.forEach(el=>{
+      el.style.opacity=0;
+      el.style.transform='translateY(60px)';
+      el.style.transition='all .8s ease';
+      observer.observe(el);
+    });
+  </script> 
+<script>
+const form = document.getElementById("contact-form");
+const message = document.getElementById("success-message");
+
+form.addEventListener("submit", function(e){
+  e.preventDefault();
+
+  fetch(form.action, {
+    method: "POST",
+    body: new FormData(form)
+  }).then(() => {
+    message.style.display = "block";
+    form.reset();
+  });
+});
+</script>
+
+<script>
+
+document.addEventListener("DOMContentLoaded",function(){
+
+const toggle=document.getElementById("menuToggle");
+const nav=document.getElementById("navMenu");
+
+toggle.addEventListener("click",function(){
+nav.classList.toggle("show");
+});
+
+/* auto close after click */
+document.querySelectorAll("#navMenu a")
+.forEach(link=>{
+link.addEventListener("click",()=>{
+nav.classList.remove("show");
+});
+});
+
+});
+
+</script>
+
+ 
+</body>
+</html>
